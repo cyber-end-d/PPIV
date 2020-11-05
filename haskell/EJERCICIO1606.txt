@@ -1,0 +1,5 @@
+hacer una funcion que recursivamente usando break me separe una expresion camelCase
+
+break isUpper "holaMundo" devuelve ("hola", "Mundo")
+
+hacer una funcion all "safe" que en vez de False devuelve Nothing

@@ -1,0 +1,23 @@
+Definir una función que aplicada a 2 listas de números con igual cantidad de elementos, que representan los vectores a y b, devuelva la suma de los vectores
+
+( defun sumarVect( a b ) 
+	(IF (OR (NULL a) (NULL b) NIL)
+	( MAPCAR '+a b )
+	)
+	
+)
+
+en cond puede haber mas de una condicion, en if es solo una
+
+Definir una función signo que devuelve 1 si x es positivo, 0 si x es 0 y -1 si x es negativo
+
+( defun signo (x)
+	(COND ((NULL x) NIL)
+	      ((> x 0) 1)
+	      ((EQ(x 0)) 0)
+	      (T -1)
+	)
+)
+
+
+Hacerla booleana, <0 true, >0 false usando la funcion que hizo antes

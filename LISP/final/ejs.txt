@@ -1,0 +1,99 @@
+Guia 2 
+
+8. Una función que aplicada a una matriz ( representada por una lista donde cada elemento es una sublista que representa una fila de la matriz) devuelva:
+
+ 
+
+a.    la suma de los elementos de la diagonal principal
+
+b.    una lista que contenga los elementos de la otra diagonal
+
+           c.    la matriz traspuesta
+
+Ej.: ( ( 1 2 3) (4 5 6) (7 8 9) )
+a) 1+5+9 = 15
+b) (3 5 7)
+c) ( (1 4 7) (2 5 8) (3 6 9)
+
+
+
+11. Una función que aplicada a dos matrices, con las dimensiones adecuadas, devuelva:
+
+ a. la suma de las dos matrices
+
+ b.    el producto
+
+a. (sumaMat '((1 2 3) (4 5 6)) '((7 8 9)(3 2 1)) ) ----> ((8 10 12) (7 7 7))
+b. (prod '((1 2 3) (4 5 6)) '((2 2)(3 3)(4 4)) ) ----> ((20 20) (47 47))
+
+ 
+
+13. Una función que aplicada a dos números naturales N y M, genere una matriz de N x M conteniendo las coordenadas de cada posición. ( este ejercicio me parece útil  como paso intermedio para resolver algún problema .... Así como uno usa listas vectores agregar matriz que es casi lo mismo )
+
+   Ej.: (coord 3 2 ) ------> ( ((1 1)(1 2)) ((2 1) (2 2)) ((3 1) (3 2)) )               
+
+ 
+
+14. Una función que aplicada a una lista con los nombres de los palos y una lista con los números de un mazo de cartas, genere una lista de sublistas que contienen el palo y valor de cada carta del mazo.
+
+Ej.: (mazo '(oro basto espada copa)'(1 2 3) )
+------> ( (1 oro)(2 oro)(3 oro) (1 basto)(2 basto)(3 basto)
+(1 espada)(2 espada)(3 espada) (1 copa)(2 copa)(3 copa))
+
+
+y de la Guia 3 
+
+
+12. Escribir una función que aplicada a dos lista, donde la primer lista
+
+contiene 3 valores (a b c) y la segunda lista contiene un predicado con 3 variables, devuelva T si se cumple el predicado reemplazando las 3 variables por los 3 valores de la primer lista, de lo contrario devuelva NIL.
+
+ 
+
+Ej.1: (verificar '(2 3 4) '(and (= b (+ a 1)) (= c (+ b 1)) ) ) ---> T
+
+Ej.2: (verificar '(3 9 5) '(and (= b (+ a 1)) (= c (+ b 1)) ) ) ---> NIL
+
+Ej.3: (verificar '((m y z) ((h I) m) (a b) '(or (equal (caar a) (cadr b))
+
+(NULL(cdr c)) ) ---> T
+
+
+13. Escribir una función que, dada una lista de nombres de funciones y una lista donde cada elemento es una lista de argumentos para cada una de esas funciones devuelva una lista de los resultados de aplicar cada función a sus argumentos. Se asume que el orden de cada función corresponde con el de sus argumentos y que no hay más funciones que listas de argumentos o viceversa. Por ejemplo:
+
+ 
+
+Ej.: (ejecuta-lista '(reverse append cons first)
+
+'(((A B C)) ((A) (B)) (A NIL) ((A B C))))  -----> ((C B A) (A B) (A) A )
+
+
+14. En una página web se muestra la cartelera de cines de la ciudad
+en una estructura de datos donde para cada cine se sabe:
+- nombre (que sirve al mismo tiempo de identificativo),
+- una lista con los nombres de las salas
+(números o no).
+- qué película se proyecta en cada sala, mediante una lista con las
+películas en el mismo orden que la lista de las salas.
+- horario de proyecciones
+Véase el siguiente ejemplo de una cartelera:
+(setq cines
+'((AMBASADOR
+(SALAS A B)
+(PELICULAS (TIBURON) (ESPARTACUS))
+(PROYECCIONES (13 16 19 23) (18 20 23))
+)
+(BELGRANO
+(PELICULAS (LA MASCARA) (FORREST GUMP)
+(PULP FICTION) (EL PIANO) (EL REY LEON))
+(SALAS 1 2 3 4 5)
+(PROYECCIONES (16 0) (19 23) (23 0)(17 21 0)(15 18)
+)
+))
+Escribir una función que dada la cartelera de cines y una hora, me
+liste las películas que se proyectan en ese horario, en que cine y en
+qué sala.
+Ej.: (horarioPeliculas cines 23)
+( (AMBASADOR (Sala A (TIBURON))(Sala B (ESPARTACUS)))
+(BELGRANO (Sala 2 (FORREST GUMP))(Sala 3 (PULP FICTION))
+)

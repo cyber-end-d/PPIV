@@ -1,0 +1,7 @@
+( defun signo (x)
+	(COND ((NULL x) NIL)
+	      ((> x 0) 1)
+	      ((EQ(x 0)) 0)
+	      (T -1)
+	)
+)

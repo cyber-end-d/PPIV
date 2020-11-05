@@ -1,0 +1,211 @@
+;1) Intercalar ELEMENTOS DE DOS LISTAS DE IGUAL LONGITUD( SE CONSTRUYE UNA NUEVA LISTA ...DIGAMOS DE ALGUNA MANERA )
+(defun intercalar (x y)
+                (cond ((and (null x) (null y)) nil)         
+                	(t (cons (car x) (intercalar y (cdr x))
+			   )
+			)
+		)
+)
+                
+
+(setf l '(1 2 3))
+(setf h '(4 5 6))
+
+(print (intercalar l h) )
+
+;2) EL 1) ERA PARA QUE SE HICIERA ordenar UNA LISTA
+(defun INTERC ( U W ) 
+( cond
+  ( ( atom u) w)
+    (( atom w)u) 
+    (( < ( car u) (car w)) ( cons ( car u) (INTERC ( cdr u) w) )) 
+  ( T ( cons ( car w) ( INTERC ( cdr w) u)))
+ ))
+ 
+ 
+
+(defun ordenar (x)
+
+        (cond ((null x) nil) ((atom x) (cons x nil))
+        (t (INTERC  (ordenar ( car x)) (ordenar ( cdr x ) ))
+        )
+        )
+)
+
+(setf l '(4 15 30 17))
+(setf h '(22 2 1 6))
+
+(print (INTERC l h) )
+
+
+(print (ordenar (INTERC l h)) )
+
+
+;3)TENIAN Union DE DOS LISTAS PARA HACER  ... lo comenté y no se llegó a hacer
+
+(defun pertenece (x l)
+    (cond
+    ((null l) 0 )
+    ((eq x (CAR l)) 1  )
+    (t (pertenece x (cdr l)))
+    )
+)
+
+
+(setf l '(1 2 3 4 5))
+(print (pertenece 2 l) )
+
+(defun unir (x y)
+    (cond ((null x) y ) ((null y) x ) 
+        
+        (t (cond ((eq 0 (pertenece (car y) x)) (cons (car y) (unir x (cdr y))))
+                (t (unir x (cdr y))) 
+                )
+            )
+        )
+        )
+    
+
+(setf l '(1 2 3 9 4 5))
+(setf h '(4 5 6 9))
+
+(print (unir h l) )
+
+;4)Profundidad de una lista
+(defun max2 (x y)
+        (cond ((< x y) y )
+            (t x)
+            )
+)
+
+
+(defun prof (x)
+    (cond ((atom x) 0)
+        (t (max2 (+ (prof (car x)) 1) (prof (cdr x)))
+        )
+    
+    )
+)
+    
+(print (prof '( 2 5  3   (1)      )))
+
+;5) Construir una lista  de manera tal que dado un numero X obtenga la lista desde X de manera  Decreciente hasta llegar a 1
+X, X-1,x-2,x-3 .... 1
+
+(defun decreciente (x)
+        (cond ((> x 0)(cons x (decreciente (- x 1)))
+               )
+        (t nil)
+        )
+)
+
+
+(print (decreciente 9))
+
+;1) Escribir una función que recibe una lista con el nombre de una variable seguido del operador ++ o bien - - por ej. ( a ++ ) y devuelva la lista que contiene la variable, seguido del símbolo igual, seguido de la variable, seguido del operado + o bien – seguido del número 1. Ej.1: convertir &#39;(a ++ ) ---------&gt; (a = a + 1). Ej.2: convertir &#39;(sum - - ) ---------&gt; (sum = sum - 1).
+
+(defun convertir (x)
+            (cond
+                ((eq (car (cdr x)) '++) (list (car x) '= (car x) '+ 1))
+                ((eq (car (cdr x)) '--) (list (car x) '= (car x) '- 1))
+            )
+)
+
+(setf h '(a ++))
+(setf m '(a --))
+
+(print (convertir h) )
+
+(print (convertir m) )
+
+;Interseccion de dos listas
+
+
+(defun pertenece (x l)
+    (cond
+    ((null l) 0 )
+    ((eq x (CAR l)) 1  )
+    (t (pertenece x (cdr l)))
+    )
+)
+
+
+(setf l '(1 2 3 4 5))
+(print (pertenece 2 l) )
+
+(defun intersec (x y)
+    (cond ((null x) nil)((null y) nil)
+        (t (
+            cond ((eq (pertenece (car x) y) 1 ) (cons (car x) (intersec (cdr x) y)))
+                (t (intersec (cdr x) y)
+                )
+           )
+        )
+                                        
+    )
+)
+
+
+(setf l '(1 2 3 4 5))
+(setf h '(2 4 8 3 9 7))
+
+(print (intersec l h) )
+
+;3) Una función que aplicada a una lista devuelva otra lista con los elementos de las posiciones pares de la lista original. Ej: ( pares '(A B C D E) ------> ( B D )
+
+;debería modificar para que evalue si el tamaño es par o impar y ahi funcionar (para q no salga NIL en las funciones con cant impar)
+(defun pares (x)
+    (cond ((null x) nil)
+        (t 
+            (cons (car (cdr x)) (pares (cdr (cdr x)))))
+    )
+)
+
+(setf l '(1 2 3 4 5 6))
+(print (pares l))
+
+
+;4 ) Una función que aplicada a dos listas, donde la 2da lista tiene números, devuelva una lista con los elementos de la 1er lista que se encuentran en las posiciones que indican los números que componen la 2da lista. ( utilizando la función POSICION o POS ya definida en clase anterior que indicaba el elemento que estaba en la posición indicada por un número)
+
+( defun pos ( a b )  
+            ( if   ( null    a  )  nil
+                 ( if ( > b 0 ) ( pos ( cdr  a) ( - b 1 ) )
+                         ( car  a) 
+                 )   
+             )
+)
+
+(setf l '(a b c))
+
+(print (pos l 5))
+
+(defun listaPos (x y)
+;x lista para buscar
+;y lista con las posiciones
+    (cond ((null x) nil)((null y)nil) 
+        (t (cons (pos x (car y)) (listaPos x (cdr y)))
+        )
+    )
+    
+)
+
+(setf l1 '(a b c d e f g))
+(setf l2 '(0 2 3 5 9 3 1 2))
+
+(print (listaPos l1 l2))
+
+
+;5) Una función que aplicada a una lista de n niveles con átomos numéricos, devuelva la misma lista donde cada elemento quede incrementado en 1. Ej. ( ( 2 (3 4)) 4 (((5) 6) 7) ) ------> ( (3 (4 5)) 5 (((6) 7) 8))
+
+(defun incrementar (x)
+    (cond ((null x) nil ) ((listp (car x)) (cons (incrementar (car x))(incrementar (cdr x))))
+        (t (cons (+ (car x) 1) (incrementar (cdr x)))
+        )
+    )
+
+)
+
+(setf l '(0 2 (2 (3 6) 4) 3 5 9 3 1 2))
+(setf h '( ( 2 (3 4)) 4 (((5) 6) 7))) 
+(print (incrementar l ))
+(print (incrementar h ))

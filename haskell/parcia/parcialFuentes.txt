@@ -1,0 +1,95 @@
+--Desarrolle un programa que defina el tipo de dato algebraico Producto. Cada Producto tiene asociado un precio, un stock, y un stock mínimo. Definir una función que, a través del uso de la evaluación condicional con guards, devuelve True si el stock del producto es igual o mayor al stock mínimo. En caso de que el stock sea menor al mínimo, la función debería devolver False. Se deberá definir otra función que reciba una lista de productos y devuelva una lista con todos los productos cuyo stock es menor al mínimo.
+type Precio = Float
+type Stock = Int
+type StockMin = Int
+
+data Producto = Producto Precio Stock StockMin deriving (Show)
+
+stock (Producto _ s sm) | s>=sm = True
+                        | s<sm = False
+
+situacion :: [Producto]->[Producto]
+situacion [] = []
+situacion (x:xs)= if stock x == False    
+                            then [x] ++ situacion xs
+                            else situacion xs 
+           
+
+--Desarrolle un programa que defina el tipo de dato algebraico Factura. Factura puede tener tres constructores de valor distintos: A, B o C. Cada factura tiene como dato el monto total a pagar. Desarrollar una función que reciba una lista de facturas y calcule el monto total de las facturas de tipo B.
+
+type Valor = Float
+data Factura = A Valor | B Valor | C Valor deriving (Show) 
+
+montoB:: [Factura]-> Float
+montoB []=0
+montoB (x:xs) = comprobar x + montoB xs
+
+comprobar:: Factura -> Float
+comprobar (B v) = v
+comprobar (A _) = 0
+comprobar (C _) = 0
+
+--Desarrolle un programa que defina el tipo de dato algebraico Persona, que contenga nombre, apellido y edad. Definir la función que reciba una lista de personas y devuelva la persona de mayor edad.
+type Nombre = String
+type Apellido = String
+type Edad = Int
+
+data Persona = Persona Nombre Apellido Edad deriving (Show)
+
+verEdad (Persona _ _ e) = e
+
+maximaEdad (x:xs) = if ((verEdad x) == maximum (listaEdades (x:xs))) then x else maximaEdad xs 
+
+listaEdades []= []
+listaEdades (x:xs) = verEdad x : listaEdades xs
+
+--Desarrolle un programa que defina el tipo de dato algebraico Producto. Cada Producto tiene asociado un precio, un stock, y un stock mínimo. Definir una función que, a través del uso de la evaluación condicional con guards, devuelve el precio del producto si el stock del producto es igual o mayor al stock mínimo. En caso de que el stock sea menor al mínimo, la función debería devolver cero.
+
+type Precio = Float
+type Stock = Int
+type StockMin = Int
+
+data Producto = Producto Precio Stock StockMin deriving (Show)
+
+verPrecio:: Producto -> Precio
+verPrecio (Producto p _ _) = p
+
+stock (Producto _ s sm) | s>=sm = True | s<sm = False
+
+precioS (x:xs) = if stock x == True then verPrecio x ++ precioS xs else precioS xs
+
+--Desarrolle un programa que defina el tipo de dato algebraico Producto. Cada Producto tiene asociado un precio, un stock, y un stock mínimo. Definir una función que, a través del uso de la evaluación condicional con guards, devuelve el precio del producto si el stock del producto es igual o mayor al stock mínimo. En caso de que el stock sea menor al mínimo, la función debería devolver cero.
+
+type Precio = Float
+type Stock = Int
+type StockMin = Int
+
+data Producto = Producto Precio Stock StockMin deriving (Show)
+
+verPrecio:: Producto -> Precio
+verPrecio (Producto p _ _) = p
+
+stock (Producto _ s sm) | s>=sm = True | s<sm = False
+
+precio x | ((stock x) == True) = verPrecio x
+| ((stock x) == False) = 0
+
+--Desarrolle un programa que defina el tipo de dato algebraico Producto. Cada Producto tiene asociado un precio y un stock. Definir una función que recibe dos productos y, a través del uso de la evaluación condicional con guards, devuelve el precio del producto del cual se tiene mayor stock. Se recomienda encapsular el resultado usando el tipo parametrizado Maybe.
+
+type Precio = Float
+type Stock = Int
+type StockMin = Int
+
+data Producto = Producto Precio Stock StockMin deriving (Show)
+
+verPrecio:: Producto -> Precio
+verPrecio (Producto p _ _) = p
+
+verStock:: Producto -> Int
+verStock (Producto _ s _) = s
+
+
+mayorS x y | (verStock x) > (verStock y) = Just (verPrecio x)
+| (verStock x) < (verStock y) = Just (verPrecio y)
+| otherwise = Nothing
+

@@ -1,0 +1,6 @@
+takeWhile
+dropWhile
+zipWith
+all
+any
+reverse

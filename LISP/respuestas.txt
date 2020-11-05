@@ -1,0 +1,50 @@
+﻿;1. Definir la función  suma que devuelva la suma de los elementos de una lista utilizando DO
+
+(defun suma (l)
+    (DO ((x l (cdr x))
+        (r 0 (+ r (car x))))
+        ((null x) r)
+    )
+)
+ 
+(setf l '(1 2 3 4))
+(print (suma l))
+
+
+;2.Definir la función de factorial utilizando PROG
+
+(defun factorial (n)
+    (prog ((cont n)
+        (resultado 1))
+        etiqueta
+        (if (= 0 cont) (return result))
+        (setq result (* cont result)
+            cont (- cont 1)
+        )
+        (go etiqueta)
+    )
+)
+
+
+(setf n '4)
+(print (factorial n))
+
+
+;3. Al igual que el punto anterior definir la funcion factorial pero utilizando DOTIMES
+
+(defun factorial(x)
+        (setf result '1)
+        (dotimes (cont n result) (setf result  (* result (1+ cont)))
+        )
+)
+(setf n '5)
+(print (factorial n))
+
+
+;4) Definir una funcion que eleve al cuadrado los elementos de la lista utilizando la funcion LAMBDA y MAPCAR
+(defun cuadrado (l)
+(mapcar #'(lambda (n) (* n n)) l)
+)  
+ (setf h '(1 2 4 5))
+
+(print (cuadrado h))

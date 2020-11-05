@@ -1,0 +1,1 @@
+largoCola (x:xs) = length(xs)
